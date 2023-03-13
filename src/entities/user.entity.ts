@@ -32,7 +32,7 @@ export class User {
     description?: string | null | undefined;
     
     @Column({ type: "varchar", length: 20, enum: ["active", "busy", "absent"], default: "active" })
-    status: iStatus; //verificar se esse enum funciona mesmo
+    status: iStatus; 
 
     @CreateDateColumn()
     createdAt: Date;

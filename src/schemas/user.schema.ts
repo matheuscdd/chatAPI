@@ -28,7 +28,12 @@ z.object({
     id: z.string(),
 }));
 
+const status = z.object({
+    status: z.enum(["active", "busy", "absent"])
+});
+
 export default {
+    status,
     create,
     update,
     removePwd

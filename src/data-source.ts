@@ -23,7 +23,7 @@ function dataSourceConfig(): DataSourceOptions {
         type: "postgres",
         url: dblUrl,
         synchronize: false,
-        logging: false,
+        logging: true,
         entities: [entitiesPath],
         migrations: [migrationsPath]
      }

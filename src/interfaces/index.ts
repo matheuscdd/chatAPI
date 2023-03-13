@@ -2,7 +2,8 @@ import {
     iStatus,
     iUserCreate,
     iUserWithoutPwd,
-    iUserUpdate
+    iUserUpdate,
+    iStatusReq
 } from "./user.interface";
 
 import {
@@ -16,5 +17,6 @@ export {
     iUserWithoutPwd,
     iUserUpdate,
     iLogin,
-    iToken
+    iToken,
+    iStatusReq
 }

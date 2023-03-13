@@ -11,6 +11,11 @@ user.post("",
     controllers.user.create
 );
 
+user.put("", 
+    middleware.dataValid(schemas.user.status),
+    controllers.user.status
+);
+
 user.get("",
     controllers.user.list
 );
@@ -23,6 +28,7 @@ user.delete("",
 user.patch("",
     middleware.tokenValid,
     middleware.dataValid(schemas.user.update),
+    middleware.emailValid,
     controllers.user.update
 );
 

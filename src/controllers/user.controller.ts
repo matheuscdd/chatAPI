@@ -17,8 +17,13 @@ async function remove(req: Request, res: Response): Promise<Response> {
     return res.status(204).json();
 }
 
-async function update(req: Request, res: Response) {
-    const user: iUserWithoutPwd = await services.update(req.body, req.idUser);
+async function update(req: Request, res: Response): Promise<Response> {
+    const user: iUserWithoutPwd = await services.update.entire(req.body, req.idUser);
+    return res.status(200).json(user);
+}
+
+async function status(req: Request, res: Response): Promise<Response> {
+    const user: iUserWithoutPwd = await services.update.status(req.body.status, req.idUser);
     return res.status(200).json(user);
 }
 
@@ -37,6 +42,7 @@ export default {
     create,
     list,
     remove,
+    status,
     update,
     findId,
     findName
