@@ -17,6 +17,11 @@ async function remove(req: Request, res: Response): Promise<Response> {
     return res.status(204).json();
 }
 
+async function update(req: Request, res: Response) {
+    const user: iUserWithoutPwd = await services.update(req.body, req.idUser);
+    return res.status(200).json(user);
+}
+
 async function findId(req: Request, res: Response): Promise<Response> {
     const user: iUserWithoutPwd = await services.find.idUser(req.params.id);
     return res.status(200).json(user);
@@ -28,11 +33,11 @@ async function findName(req: Request, res: Response): Promise<Response> {
 }
 
 
-
 export default {
     create,
     list,
     remove,
+    update,
     findId,
     findName
 }

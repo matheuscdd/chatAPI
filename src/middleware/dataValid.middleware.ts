@@ -11,7 +11,7 @@ export function dataValid(schema: ZodTypeAny, arrKeys: string[] = []) {
         if (!Object.keys(validatedData).length) throw new AppError(`Some optional keys are missing ${arrKeys}`, 400);
 
         req.body = validatedData;
-
+        
         return next();
     }
 }

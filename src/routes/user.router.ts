@@ -15,13 +15,19 @@ user.get("",
     controllers.user.list
 );
 
-user.delete("/:id",
-    middleware.idUserValid,
+user.delete("",
+    middleware.tokenValid,
     controllers.user.remove
 );
 
+user.patch("",
+    middleware.tokenValid,
+    middleware.dataValid(schemas.user.update),
+    controllers.user.update
+);
+
 user.get("/id/:id",
-    // middleware.idUserValid,
+    middleware.idUserValid,
     controllers.user.findId
 );
 
