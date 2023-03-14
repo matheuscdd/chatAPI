@@ -15,8 +15,7 @@ async function find(id: string): Promise<iTalkCreateReturn> {
         .orderBy("messages.createdAt", "DESC")
         .getOne()
 
-    
-    const updatedAt = talk?.messages[0].createdAt ?  talk!.messages[0].createdAt : talk!.createdAt;
+    const updatedAt = talk?.messages.length ?  talk!.messages[0].createdAt : talk?.createdAt;
     return schemas.talk.returnTalk.parse({...talk, updatedAt });
 }
 

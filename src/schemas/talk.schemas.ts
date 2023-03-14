@@ -19,7 +19,7 @@ const returnTalk = z.object({
     }).array()
 });
 
-const returnTalkWithoutMessages = returnTalk.omit({ messages: true });
+const returnTalkWithoutMessages = returnTalk.omit({ messages: true, updatedAt: true });
 
 const returnUserTalks = user.removePwd.extend({
     talks: returnTalk.omit({ members: true }).array()
