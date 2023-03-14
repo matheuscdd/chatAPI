@@ -2,20 +2,7 @@ import { Repository } from "typeorm";
 import { Talk, User } from "../../entities";
 import { AppDataSource } from "../../data-source";
 import schemas from "../../schemas";
-import { iTalkCreateReturn, iUserTalksReturn } from "../../interfaces";
-
-async function find(id: string): Promise<iTalkCreateReturn> {
-    const talkRepository: Repository<Talk> = AppDataSource.getRepository(Talk);
-
-    const talk: Talk | null = await talkRepository.findOne({
-        where: { id },
-        relations: {
-            members: true
-        }
-    });
-
-    return schemas.talk.returnTalk.parse(talk);
-}
+import { iUserTalksReturn } from "../../interfaces";
 
 async function list(id: string): Promise<iUserTalksReturn> {
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
@@ -30,7 +17,5 @@ async function list(id: string): Promise<iUserTalksReturn> {
     return schemas.talk.returnUserTalks.parse(userTalks);
 }
 
-export default {
-    find,
-    list
-}
+export default list;
+

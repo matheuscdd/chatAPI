@@ -25,7 +25,7 @@ z.object({
     createdAt: z.date(),
     updatedAt: z.date().nullish(),
     deleteAt: z.date().nullish(),
-    id: z.string(),
+    id: z.string().uuid(),
 }));
 
 const status = z.object({

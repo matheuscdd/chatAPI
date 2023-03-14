@@ -13,6 +13,8 @@ talk.post("",
 
 talk.get("/:id", 
     middleware.idTalkValid,
+    middleware.tokenValid,
+    middleware.userInTalkValid,
     controllers.talk.find
 );
 
@@ -24,5 +26,6 @@ talk.get("",
 talk.delete("/:id",
     middleware.tokenValid,
     middleware.idTalkValid,
+    middleware.userInTalkValid,
     controllers.talk.remove
 );

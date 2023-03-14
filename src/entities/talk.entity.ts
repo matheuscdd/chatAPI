@@ -1,19 +1,18 @@
 import {
     Entity,
-    Column,
     PrimaryGeneratedColumn,
     CreateDateColumn,
-    UpdateDateColumn,
     DeleteDateColumn,
     ManyToMany,
     JoinTable,
-    AfterLoad,
     AfterInsert,
-    AfterUpdate,
     AfterRemove,
-    AfterRecover
+    AfterRecover,
+    OneToMany,
+    AfterLoad
 } from "typeorm";
 import { User } from "./user.entity";
+import { Message } from "./message.entity";
 
 @Entity("talks")
 export class Talk {
@@ -24,9 +23,6 @@ export class Talk {
     @CreateDateColumn()
     createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
-
     @DeleteDateColumn()
     deleteAt: Date | null;
 
@@ -34,18 +30,19 @@ export class Talk {
     @JoinTable()
     members: User[];
 
+    @OneToMany(() => Message, (message) => message.talk)
+    messages: Message[];
 
     @AfterInsert()
-    @AfterUpdate()
     @AfterRemove()
     @AfterRecover()
+    @AfterLoad()
     Dater() {
         const handleDate = (time: Date): Date => {
             const date = new Date(time);
             return new Date(date.setUTCMinutes(date.getUTCMinutes() - 180));
         }
         this.createdAt = handleDate(this.createdAt);
-        this.updatedAt = handleDate(this.updatedAt);
         this.deleteAt ? this.deleteAt = handleDate(this.deleteAt) : null;
     }
 

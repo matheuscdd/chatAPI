@@ -11,7 +11,8 @@ import {
     AfterInsert,
     AfterUpdate,
     AfterRemove,
-    AfterRecover
+    AfterRecover,
+    AfterLoad
 } from "typeorm";
 import { iStatus } from "../interfaces";
 import { hashSync, getRounds } from "bcryptjs";
@@ -64,6 +65,7 @@ export class User {
     @AfterUpdate()
     @AfterRemove()
     @AfterRecover()
+    @AfterLoad()
     Dater() {
         const handleDate = (time: Date): Date => {
             const date = new Date(time);

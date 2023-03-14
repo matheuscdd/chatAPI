@@ -1,5 +1,6 @@
 import { z } from "zod";
 import user from "./user.schema";
+import message from "./message.schema";
 
 const create = z.object({
     members: z.array(z.string().uuid()).nonempty()
@@ -8,10 +9,16 @@ const create = z.object({
 const returnTalk = z.object({
     id: z.string().uuid(),
     createdAt: z.date(),
-    updatedAt: z.date().nullish(),
     deleteAt: z.date().nullish(),
-    members: user.removePwd.pick({ name: true, status: true, id: true }).array()
+    members: user.removePwd.pick({ name: true, status: true, id: true }).array(),
+    messages: z.object({
+        text: z.string(),
+        id: z.string().uuid(),
+        createdAt: z.date()
+    }).array()
 });
+
+const returnTalkWithoutMessages = returnTalk.omit({ messages: true });
 
 const returnUserTalks = user.removePwd.extend({
     talks: returnTalk.omit({ members: true }).array()
@@ -20,5 +27,6 @@ const returnUserTalks = user.removePwd.extend({
 export default {
     create,
     returnTalk,
-    returnUserTalks
+    returnUserTalks,
+    returnTalkWithoutMessages
 }

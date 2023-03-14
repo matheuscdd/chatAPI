@@ -5,8 +5,10 @@ import {
     PrimaryGeneratedColumn,
     ManyToOne,
     AfterInsert,
+    AfterLoad,
 } from "typeorm";
 import { User } from "./user.entity";
+import { Talk } from "./talk.entity";
 
 @Entity("messages")
 export class Message {
@@ -23,7 +25,11 @@ export class Message {
     @CreateDateColumn()
     createdAt: Date;
 
+    @ManyToOne(() => Talk, (talk) => talk.messages)
+    talk: Talk;
+
     @AfterInsert()
+    @AfterLoad()
     Dater() {
         const handleDate = (time: Date): Date => {
             const date = new Date(time);

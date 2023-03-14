@@ -3,8 +3,9 @@ import { Repository } from "typeorm";
 import { Talk, User } from "../../entities";
 import { AppError } from "../../errors";
 import schemas from "../../schemas";
+import { iTalkCreateReturn } from "../../interfaces";
 
-async function create(members: string[]): Promise<any> {
+async function create(members: string[]): Promise<iTalkCreateReturn> {
     const talkRepository: Repository<Talk> = AppDataSource.getRepository(Talk);
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
     
@@ -22,7 +23,7 @@ async function create(members: string[]): Promise<any> {
         
     await talkRepository.save(talk);
 
-    return schemas.talk.returnTalk.parse(talk);
+    return schemas.talk.returnTalkWithoutMessages.parse(talk);
 }
 
 export default create;
