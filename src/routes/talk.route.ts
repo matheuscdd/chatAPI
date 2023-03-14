@@ -29,3 +29,10 @@ talk.delete("/:id",
     middleware.userInTalkValid,
     controllers.talk.remove
 );
+
+talk.get("/lastUpdate/:id", 
+    middleware.tokenValid,
+    middleware.idTalkValid,
+    middleware.userInTalkValid,
+    controllers.talk.lastUpdate
+);

@@ -23,9 +23,15 @@ async function remove(req: Request, res: Response): Promise<Response> {
     return res.status(204).json();
 }
 
+async function lastUpdate(req: Request, res: Response): Promise<Response> {
+    const date = await services.lastUpdate(req.idTalk!);
+    return res.status(200).json(date);
+}
+
 export default {
     create,
     find,
     list,
-    remove
+    remove,
+    lastUpdate
 }
