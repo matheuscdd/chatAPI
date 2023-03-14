@@ -8,6 +8,7 @@ const create = z.object({
 
 const returnTalk = z.object({
     id: z.string().uuid(),
+    updatedAt: z.date(),
     createdAt: z.date(),
     deleteAt: z.date().nullish(),
     members: user.removePwd.pick({ name: true, status: true, id: true }).array(),
