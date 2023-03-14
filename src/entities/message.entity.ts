@@ -3,7 +3,8 @@ import {
     Column,
     CreateDateColumn,
     PrimaryGeneratedColumn,
-    ManyToOne
+    ManyToOne,
+    AfterInsert,
 } from "typeorm";
 import { User } from "./user.entity";
 
@@ -20,6 +21,14 @@ export class Message {
     text: string;
     
     @CreateDateColumn()
-    createdAt: string;
+    createdAt: Date;
 
+    @AfterInsert()
+    Dater() {
+        const handleDate = (time: Date): Date => {
+            const date = new Date(time);
+            return new Date(date.setUTCMinutes(date.getUTCMinutes() - 180));
+        }
+        this.createdAt = handleDate(this.createdAt);
+    }
 }

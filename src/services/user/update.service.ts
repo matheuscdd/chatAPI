@@ -1,7 +1,7 @@
-import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
+import { Repository } from "typeorm";
 import { User } from "../../entities";
-import { iStatus, iStatusReq, iUserUpdate, iUserWithoutPwd } from "../../interfaces";
+import { iStatusReq, iUserUpdate, iUserWithoutPwd } from "../../interfaces";
 import schemas from "../../schemas";
 
 async function entire(newUserData: iUserUpdate, id: string): Promise<iUserWithoutPwd> {

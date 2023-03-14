@@ -11,6 +11,12 @@ import {
     iToken
 } from "./session.interface";
 
+import { 
+    iTalkCreateReturn,
+    iUserTalksReturn 
+} from "./talk.interface";
+
+
 export {
     iStatus,
     iUserCreate,
@@ -18,5 +24,7 @@ export {
     iUserUpdate,
     iLogin,
     iToken,
-    iStatusReq
+    iStatusReq,
+    iTalkCreateReturn,
+    iUserTalksReturn
 }

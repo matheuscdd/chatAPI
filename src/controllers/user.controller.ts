@@ -18,12 +18,12 @@ async function remove(req: Request, res: Response): Promise<Response> {
 }
 
 async function update(req: Request, res: Response): Promise<Response> {
-    const user: iUserWithoutPwd = await services.update.entire(req.body, req.idUser);
+    const user: iUserWithoutPwd = await services.update.entire(req.body, req.idUser!);
     return res.status(200).json(user);
 }
 
 async function status(req: Request, res: Response): Promise<Response> {
-    const user: iUserWithoutPwd = await services.update.status(req.body.status, req.idUser);
+    const user: iUserWithoutPwd = await services.update.status(req.body.status, req.idUser!);
     return res.status(200).json(user);
 }
 
@@ -37,6 +37,11 @@ async function findName(req: Request, res: Response): Promise<Response> {
     return res.status(200).json(user);
 }
 
+async function profile(req: Request, res: Response): Promise<Response> {
+    const user: iUserWithoutPwd = await services.profile(req.idUser!);
+    return res.status(200).json(user);
+}
+
 
 export default {
     create,
@@ -44,6 +49,7 @@ export default {
     remove,
     status,
     update,
+    profile,
     findId,
     findName
 }

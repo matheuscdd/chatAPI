@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.use("/users", routes.user);
 app.use("/session", routes.session);
+app.use("/talks", routes.talk);
 
 app.use(handleErrors);
 

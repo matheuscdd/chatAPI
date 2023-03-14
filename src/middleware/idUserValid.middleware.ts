@@ -16,5 +16,7 @@ export async function idUserValid(req: Request, res: Response, next: NextFunctio
 
     if (!user) throw new AppError(`User not found`, 404);
 
+    req.idUser;
+
     return next();
 }

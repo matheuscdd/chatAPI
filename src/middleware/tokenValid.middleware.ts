@@ -14,8 +14,8 @@ export async function tokenValid(req: Request, res: Response, next: NextFunction
     async function check(error: any, decoded: any) {
         if (error) throw new AppError(error.message, 401);
         const userRepository: Repository<User> = AppDataSource.getRepository(User);
-        const userFound: User | null = await userRepository.findOneBy({ email: decoded.email });
-        if (!userFound) throw new AppError(`Wrong token`, 401)
+        const user: User | null = await userRepository.findOneBy({ email: decoded.email });
+        if (!user) throw new AppError(`Wrong token`, 401)
         req.idUser = decoded.sub;
     }
 

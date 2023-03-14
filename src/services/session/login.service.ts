@@ -1,27 +1,29 @@
-import { Repository } from "typeorm";
-import { iLogin, iToken } from "../../interfaces";
-import { User } from "../../entities";
 import { AppDataSource } from "../../data-source";
+import { Repository } from "typeorm";
+import { User } from "../../entities";
+import { iLogin, iToken } from "../../interfaces";
 import { AppError } from "../../errors";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 
-export async function login(payload: iLogin): Promise<iToken> {
+async function login(payload: iLogin): Promise<iToken> {
     const userRepository: Repository<User> = AppDataSource.getRepository(User);
     
-    const userFound: User | null = await userRepository.findOneBy({ email: payload.email });
+    const user: User | null = await userRepository.findOneBy({ email: payload.email });
 
-    if (!userFound) throw new AppError(`Email or password wrong`, 401);
+    if (!user) throw new AppError(`Email or password wrong`, 401);
 
-    const pwdMatch: boolean = await compare(payload.password, userFound.password);
+    const pwdMatch: boolean = await compare(payload.password, user.password);
 
     if (!pwdMatch) throw new AppError(`Email or password wrong`, 401);
 
     const token: string = sign(
-        { email: userFound.email },
+        { email: user.email },
         String(process.env.SECRET_KEY),
-        { expiresIn: "24h", subject: String(userFound.id) }
+        { expiresIn: "24h", subject: String(user.id) }
     );
 
     return { token };
 }
+
+export default login;

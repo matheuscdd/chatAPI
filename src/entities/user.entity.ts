@@ -7,7 +7,11 @@ import {
     DeleteDateColumn,
     BeforeInsert,
     BeforeUpdate,
-    ManyToMany
+    ManyToMany,
+    AfterInsert,
+    AfterUpdate,
+    AfterRemove,
+    AfterRecover
 } from "typeorm";
 import { iStatus } from "../interfaces";
 import { hashSync, getRounds } from "bcryptjs";
@@ -41,7 +45,7 @@ export class User {
     updatedAt: Date;
 
     @DeleteDateColumn()
-    deleteAt: Date;
+    deleteAt: Date | null;
     
     @Column({ type: "varchar", length: 120 })
     password: string;
@@ -54,6 +58,20 @@ export class User {
     hashPasswd() {
         const isEncrypted: number = getRounds(this.password);
         if (!isEncrypted) this.password = hashSync(this.password, 10);
+    }
+
+    @AfterInsert()
+    @AfterUpdate()
+    @AfterRemove()
+    @AfterRecover()
+    Dater() {
+        const handleDate = (time: Date): Date => {
+            const date = new Date(time);
+            return new Date(date.setUTCMinutes(date.getUTCMinutes() - 180));
+        }
+        this.createdAt = handleDate(this.createdAt);
+        this.updatedAt = handleDate(this.updatedAt);
+        this.deleteAt ? this.deleteAt = handleDate(this.deleteAt) : null;
     }
 
 }

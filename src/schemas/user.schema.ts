@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const create = z.object({
     name: z.string().min(8).max(100),
-    email: z.string().min(4).max(120),
+    email: z.string().email().min(4).max(120),
     description: z.string().nullish(),
     password: z.string().max(20),
     status: z.enum(["active", "busy", "absent"]).default("active"),

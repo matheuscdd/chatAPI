@@ -40,3 +40,8 @@ user.get("/id/:id",
 user.get("/name/:name",
     controllers.user.findName
 );
+
+user.get("/profile", 
+    middleware.tokenValid,
+    controllers.user.profile
+);

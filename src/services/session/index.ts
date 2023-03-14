@@ -1,4 +1,4 @@
-import { login } from "./login.service";
+import login from "./login.service";
 
 export default {
     login
