@@ -5,7 +5,7 @@ const create = z.object({
     email: z.string().email().min(4).max(120),
     description: z.string().nullish(),
     password: z.string().max(20),
-    status: z.enum(["active", "busy", "absent"]).default("active"),
+    status: z.enum(["active", "busy", "absent"]).optional().default("active"),
     birthDate: z.preprocess((value) => {
         if (typeof value === "string" && value.includes("/")) {
             const [day, month, year] = value.split("/");

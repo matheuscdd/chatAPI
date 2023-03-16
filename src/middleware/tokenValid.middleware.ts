@@ -4,10 +4,11 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities";
 import { verify } from "jsonwebtoken";
+import { MISSING_TOKEN, WRONG_TOKEN } from "../constraints/messages";
 
 export async function tokenValid(req: Request, res: Response, next: NextFunction) {
     let token: string = req.headers.authorization!;
-    if (!token) throw new AppError(`Missing bearer token`, 401);
+    if (!token) throw new AppError(MISSING_TOKEN, 401);
 
     token = token.split(" ")[1];
 
@@ -15,7 +16,7 @@ export async function tokenValid(req: Request, res: Response, next: NextFunction
         if (error) throw new AppError(error.message, 401);
         const userRepository: Repository<User> = AppDataSource.getRepository(User);
         const user: User | null = await userRepository.findOneBy({ email: decoded.email });
-        if (!user) throw new AppError(`Wrong token`, 401)
+        if (!user) throw new AppError(WRONG_TOKEN, 401)
         req.idUser = decoded.sub;
     }
 

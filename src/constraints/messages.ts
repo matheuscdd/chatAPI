@@ -1,0 +1,13 @@
+export const BODY_EMPTY = `Body is empty`;
+export const INTERNAL_SERVER_ERROR = `Internal server error`;
+export const OPTIONAL_KEYS_MISSING = `Some optional keys are missing:`; 
+export const EMAIL_ALREADY_EXISTS =  `Email already exists`;
+export const ID_NOT_VALID = `Id is not valid`;
+export const TALK_NOT_FOUND = `Talk not found`;
+export const USER_NOT_FOUND = `User not found`;
+export const MISSING_TOKEN = `Missing bearer token`;
+export const WRONG_TOKEN = `Wrong token`;
+export const EMAIL_OR_PWD_WRONG = `Email or password wrong`;
+export const USER_NOT_FOUND_BY_ID = `Not found user with this id:`;
+export const NOT_MEMBER_TALK = `You're not member of this talk`;
+export const WRITE_NAME = `Please right a name`;
