@@ -35,8 +35,6 @@ describe("Unit test: create UserService functionalities", () => { //Descrição 
         const { valid } = createUserServiceMock;
         const result = await services.create(valid);
 
-        const uuid = require("uuid");
-
         const expectedResult = {
             //Estou validando se é uuid válido
             id: expect.stringMatching(uuidRegex),
@@ -49,7 +47,9 @@ describe("Unit test: create UserService functionalities", () => { //Descrição 
             //Aqui digo que espero qualquer tipo de data
             updatedAt: expect.any(Date),
             deleteAt: null
-        }
+        }   
+
+
 
         expect(result).toStrictEqual(expectedResult);
         // Quero que o resultado seja estritamente igual ao que foi pedido

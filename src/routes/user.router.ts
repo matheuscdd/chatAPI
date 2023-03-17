@@ -17,6 +17,7 @@ user.put("",
 );
 
 user.get("",
+middleware.tokenValid,
     controllers.user.list
 );
 

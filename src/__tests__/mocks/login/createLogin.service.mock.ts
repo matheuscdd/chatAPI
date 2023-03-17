@@ -6,9 +6,9 @@ const correctEmail: string = "ezio@mail.com"
 export default {
     secretKey: "va$%mo&xplic@r",
     base: {
-        name: "Ezio",
+        name: "Ezio Auditore da Fireze",
         email: correctEmail,
-        birthDate: "16/09/1998",
+        birthDate: "11/5/1991",
         password: hashSync(correctPwd, 10)
     },
     valid: {
