@@ -1,5 +1,6 @@
 import { NextFunction, Response, Request } from "express";
 import { ZodError } from "zod";
+import { INTERNAL_SERVER_ERROR } from "./constraints/messages";
 
 export class AppError extends Error {
     message: string;
@@ -28,6 +29,6 @@ export function handleErrors(error: Error, req: Request, res: Response, _: NextF
 
     console.log(error);
     return res.status(500).json({
-        message: `Internal server error`
+        message: INTERNAL_SERVER_ERROR 
     });
 }

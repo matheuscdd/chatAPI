@@ -4,6 +4,7 @@ import { Talk, User } from "../../entities";
 import { AppError } from "../../errors";
 import schemas from "../../schemas";
 import { iTalkCreateReturn } from "../../interfaces";
+import { USER_NOT_FOUND_BY_ID } from "../../constraints/messages";
 
 async function create(members: string[]): Promise<iTalkCreateReturn> {
     const talkRepository: Repository<Talk> = AppDataSource.getRepository(Talk);
@@ -11,7 +12,7 @@ async function create(members: string[]): Promise<iTalkCreateReturn> {
     
     const usersFound: Promise<User[]> = Promise.all(members.map(async(id) => {
         const userFound = await userRepository.findOneBy({ id });
-        if (!userFound) throw new AppError(`Not found user with this id: ${id}`, 404);
+        if (!userFound) throw new AppError(USER_NOT_FOUND_BY_ID + id, 404);
         return userFound;
     }));
 
